@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.input {
+  @apply border-b border-black  p-2 pl-6 outline-none my-2;
+}
+
+.btn {
+  @apply text-white p-2 rounded-md ;
+  background-color: rgb(101, 54, 255);
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color: rgb(65, 23, 203);
+}
+.btn:active {
+  background-color: rgb(101, 54, 255);
+}
+
+.login-title {
+  @apply flex items-start  justify-start py-4  w-full;
+  border-bottom: 4px solid rgb(101, 54, 255);
+}
+
+.left{
+  background-color: rgb(21, 21, 22);
+}

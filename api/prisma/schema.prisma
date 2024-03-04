@@ -13,3 +13,15 @@ model Admin {
   password  String?
   createdAt DateTime @default(now())
 }
+
+model Issue {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  symptoms Symptom[]
+}
+
+model Symptom {
+  id     Int      @id @default(autoincrement())
+  name   String   @unique
+  issues Issue[]
+}

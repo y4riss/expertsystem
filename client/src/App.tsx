@@ -1,6 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Dashboard from "./views/Dashboard";
 import Home from "./views/Home";
+import Login from "./views/Login";
 
 const App = () => {
   // const { user } = useAuthContext();
@@ -10,6 +11,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
 
           {/* <Route

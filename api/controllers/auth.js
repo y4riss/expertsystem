@@ -1,34 +1,37 @@
 const express = require("express");
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+const sqlite3 = require("sqlite3").verbose();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-const getUser = async (data) => {
-  const user = await prisma.admin.findUnique({
-    where: {
-      username: data.username,
-    },
-  });
-  if (!user) throw Error("username or password incorrect");
+const db = require("../database/db");
 
-  return user;
+const getUser = async (data) => {
+  return new Promise((resolve, reject) => {
+    const stmt = db.prepare("SELECT * FROM Admin WHERE username = ?");
+    stmt.get(data.username, (err, row) => {
+      if (err) {
+        reject(new Error("invalid username or password"));
+        return;
+      }
+      stmt.finalize();
+      resolve(row);
+    });
+  });
 };
 
 const checkPassword = async (password, hash) => {
   const match = await bcrypt.compare(password, hash);
-
   if (!match) throw Error("username or password incorrect");
   return match;
 };
 
 const login = async (req, res) => {
   const data = req.body;
-  console.log(data);
+  console.log("data : ", data);
   try {
     const user = await getUser(data);
-    console.log(user);
+    console.log("user : ", user);
     await checkPassword(data.password, user.password);
     const payload = {
       username: user.username,
@@ -45,11 +48,12 @@ const login = async (req, res) => {
       .status(200)
       .json(other);
   } catch (error) {
-    return res.status(401).json({ error: error.message });
+    return res.status(401).json({ error: "username or password incorrect" });
   }
 };
 
 const logout = (req, res) => {
+  console.log("logging out...");
   res
     .clearCookie("access_token", {
       sameSite: "none",
