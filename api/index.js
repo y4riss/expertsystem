@@ -13,7 +13,9 @@ app.get(
   "/api",
   require("./middlewares/requireAuth").requireAuth,
   (req, res) => {
-    return res.json(req.user);
+    const { password, ...other } = req.user;
+
+    return res.json(other);
   }
 );
 const PORT = process.env.PORT || 3000;
