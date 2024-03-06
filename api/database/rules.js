@@ -68,25 +68,3 @@ const rules = {
   printer_driver_issues: ["printer_not_printing"],
   failing_hard_drive: ["loud_hard_drive_noise"],
 };
-
-// Separate objects for symptoms, issues, and relations
-const symptoms = [];
-const issues = [];
-const issueSymptoms = [];
-
-// Extract data from the rules object
-Object.entries(rules).forEach(([issueName, symptomList]) => {
-  issues.push(issueName)
-  symptomList.forEach((symptom) => {
-    if (!symptoms[symptom]) {
-      symptoms.push(symptom);
-    }
-    issueSymptoms.push({ issueName, symptom });
-  });
-});
-
-console.log("Symptoms:", symptoms);
-console.log("Issues:", issues);
-console.log("IssueSymptoms:", issueSymptoms);
-
-module.exports = { symptoms, issues, issueSymptoms };

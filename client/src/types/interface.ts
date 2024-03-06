@@ -4,3 +4,13 @@ interface Admin {
   username: string;
   password: string;
 }
+
+interface Issue { 
+  id : number,
+  name : string
+}
+
+interface Symptom {
+  id : number,
+  name : string
+}

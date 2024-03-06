@@ -7,7 +7,7 @@
 }
 
 .btn {
-  @apply text-white p-2 rounded-md ;
+  @apply text-white p-2 rounded-md;
   background-color: rgb(101, 54, 255);
   transition: all 0.3s ease;
 }
@@ -24,6 +24,6 @@
   border-bottom: 4px solid rgb(101, 54, 255);
 }
 
-.left{
+.left {
   background-color: rgb(21, 21, 22);
 }
