@@ -1,6 +1,7 @@
 import { Issue } from "../types/interface";
 import axios from "axios";
-const Issues = ({ issues }) => {
+import UpdateIssueModal from "./Modals/UpdateIssueModal";
+const Issues = ({ issues, symptoms }) => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`/api/rules/issue/${id}`);
@@ -35,7 +36,19 @@ const Issues = ({ issues }) => {
               <td className="px-6 py-4">{issue.id}</td>
               <td className="px-6 py-4">{issue.issue}</td>
               <td className="px-6 py-4 flex gap-2">
-                <button className="btn ">Update</button>
+                <UpdateIssueModal issue_param={issue} symptoms={symptoms} />
+                <button
+                  className="btn "
+                  onClick={() =>
+                    (
+                      document.getElementById(
+                        `update_issue_modal_${issue.id}`
+                      ) as HTMLDialogElement
+                    )?.showModal()
+                  }
+                >
+                  Update
+                </button>
                 <button
                   onClick={() => handleDelete(issue.id)}
                   className="btn bg-red-800 text-white border-none hover:bg-red-900"

@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import axios from "axios";
-const AddsymptomModal = ({ issues }) => {
-  const [name, setName] = useState("");
-  const [selectedIssues, setSelectedIssues] = useState([]);
+const UpdateSymptomModal = ({ symptom_param, issues }) => {
+  const [name, setName] = useState(symptom_param.symptom);
+  const [selectedIssues, setSelectedIssues] = useState(
+    symptom_param.issues.map((s) => s.id)
+  );
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(name, selectedIssues);
     if (name && selectedIssues.length > 0) {
       const data = {
         symptom: name,
         issues: selectedIssues.map((s) => ({ id: s })),
       };
-      console.log(data);
       try {
-        await axios.post("/api/rules/symptom", data);
+        await axios.put(`/api/rules/symptom/${symptom_param.id}`, data);
         alert("Symptom added successfully");
         window.location.reload();
       } catch (error) {
@@ -23,7 +23,7 @@ const AddsymptomModal = ({ issues }) => {
     }
   };
   return (
-    <dialog id="add_symptom_modal" className="modal">
+    <dialog id={`update_symptom_modal_${symptom_param.id}`} className="modal">
       <div className="modal-box">
         <h3 className="font-bold text-lg">Add a new Symptom</h3>
         <form className="" onSubmit={handleSubmit}>
@@ -41,6 +41,7 @@ const AddsymptomModal = ({ issues }) => {
               <div key={issue.id}>
                 <input
                   type="checkbox"
+                  checked={selectedIssues.includes(issue.id)}
                   onChange={(e) => {
                     if (e.target.checked) {
                       setSelectedIssues([...selectedIssues, issue.id]);
@@ -51,13 +52,13 @@ const AddsymptomModal = ({ issues }) => {
                     }
                   }}
                 />
-                <label className="cursor-pointer" >
-                  {issue.issue}
-                </label>
+                <label className="cursor-pointer">{issue.issue}</label>
               </div>
             ))}
           </div>
-          <button className="btn mt-2 w-full bg-green-500 text-black">Submit</button>
+          <button className="btn mt-2 w-full bg-green-500 text-black">
+            Submit
+          </button>
         </form>
       </div>
       <form method="dialog" className="modal-backdrop">
@@ -67,4 +68,4 @@ const AddsymptomModal = ({ issues }) => {
   );
 };
 
-export default AddsymptomModal;
+export default UpdateSymptomModal;

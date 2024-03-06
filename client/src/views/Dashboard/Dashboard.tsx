@@ -24,7 +24,6 @@ const Dashboard = () => {
     const getIssues = async () => {
       try {
         const res = await axios.get("/api/rules/issues");
-        console.log(res.data);
         setIssues(res.data);
         setLoading(false);
       } catch (error) {
@@ -82,7 +81,7 @@ const Dashboard = () => {
               Add new issue
             </button>
           </div>
-          <Issues issues={issues} />
+          <Issues issues={issues} symptoms={symptoms} />
         </div>
         <div className="flex flex-col items-center w-full">
           <div className="bigTitle flex justify-between">
@@ -101,7 +100,7 @@ const Dashboard = () => {
               Add new symptom
             </button>
           </div>
-          <Symptoms symptoms={symptoms} />
+          <Symptoms symptoms={symptoms} issues={issues} />
         </div>
       </div>
     </div>
