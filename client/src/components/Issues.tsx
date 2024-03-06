@@ -1,32 +1,53 @@
 import { Issue } from "../types/interface";
-import { Button } from "@radix-ui/themes";
+import axios from "axios";
 const Issues = ({ issues }) => {
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`/api/rules/issue/${id}`);
+      alert("Issue deleted successfully");
+      window.location.reload();
+    } catch (error) {
+      alert("Error deleting issue");
+    }
+  };
   return (
-    <table className="table-auto w-fit ">
-      <thead>
-        <tr>
-          <th className="px-4 py-2">ID</th>
-          <th className="px-4 py-2">Issue</th>
-          <th className="px-4 py-2">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {issues.map((issue: Issue) => (
-          <tr key={issue.id}>
-            <td className="border px-4 py-2">{issue.id}</td>
-            <td className="border px-4 py-2">{issue.issue}</td>
-            <td className="border px-4 py-2">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
-                Update
-              </button>
-              <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                Delete
-              </button>
-            </td>
+    <div className="relative overflow-x-auto w-3/4">
+      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th scope="col" className="px-6 py-3">
+              Id
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Name
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Actions
+            </th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {issues.map((issue: Issue) => (
+            <tr
+              key={issue.id}
+              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+            >
+              <td className="px-6 py-4">{issue.id}</td>
+              <td className="px-6 py-4">{issue.issue}</td>
+              <td className="px-6 py-4 flex gap-2">
+                <button className="btn ">Update</button>
+                <button
+                  onClick={() => handleDelete(issue.id)}
+                  className="btn bg-red-800 text-white border-none hover:bg-red-900"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

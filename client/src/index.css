@@ -3,27 +3,27 @@
 @tailwind utilities;
 
 .input {
-  @apply border-b border-black  p-2 pl-6 outline-none my-2;
-}
-
-.btn {
-  @apply text-white p-2 rounded-md;
-  background-color: rgb(101, 54, 255);
-  transition: all 0.3s ease;
-}
-
-.btn:hover {
-  background-color: rgb(65, 23, 203);
-}
-.btn:active {
-  background-color: rgb(101, 54, 255);
+  @apply border-b border-gray-400  p-2 pl-6 outline-none my-2;
 }
 
 .login-title {
   @apply flex items-start  justify-start py-4  w-full;
-  border-bottom: 4px solid rgb(101, 54, 255);
+  border-bottom: 4px solid rgb(147 51 234);
 }
 
 .left {
   background-color: rgb(21, 21, 22);
+}
+
+.bigTitle {
+  background-color: rgb(21, 21, 22);
+  padding: 2rem;
+  width: 100%;
+  margin-block: 3rem;
+}
+
+.sidebar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 }

@@ -30,7 +30,7 @@ const Login = () => {
     return <div></div>;
   }
 
-  if(currentUser) navigate("/dashboard");
+  if (currentUser) navigate("/dashboard");
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center ">
@@ -67,7 +67,10 @@ const Login = () => {
           />
           <i className="material-icons absolute left-0 bottom-4">lock</i>
         </div>
-        <button type="submit" className="btn w-full">
+        <button
+          type="submit"
+          className="btn w-full bg-purple-600 text-white hover:bg-purple-900"
+        >
           Sign In
         </button>
       </form>
