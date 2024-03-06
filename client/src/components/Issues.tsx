@@ -1,30 +1,32 @@
 import { Issue } from "../types/interface";
-import { Button, Table } from "@radix-ui/themes";
-
+import { Button } from "@radix-ui/themes";
 const Issues = ({ issues }) => {
   return (
-    <Table.Root variant="surface">
-      <Table.Header>
-        <Table.Row>
-          <Table.ColumnHeaderCell>ID</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell>Issue</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell>Actions</Table.ColumnHeaderCell>
-        </Table.Row>
-      </Table.Header>
-
-      <Table.Body>
+    <table className="table-auto w-fit ">
+      <thead>
+        <tr>
+          <th className="px-4 py-2">ID</th>
+          <th className="px-4 py-2">Issue</th>
+          <th className="px-4 py-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
         {issues.map((issue: Issue) => (
-          <Table.Row key={issue.id}>
-            <Table.RowHeaderCell>{issue.id}</Table.RowHeaderCell>
-            <Table.Cell>{issue.issue}</Table.Cell>
-            <Table.Cell className="flex gap-2">
-              <Button className="mr-2 bg-red-500 ">Update</Button>
-              <Button color="red">Delete</Button>
-            </Table.Cell>
-          </Table.Row>
+          <tr key={issue.id}>
+            <td className="border px-4 py-2">{issue.id}</td>
+            <td className="border px-4 py-2">{issue.issue}</td>
+            <td className="border px-4 py-2">
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
+                Update
+              </button>
+              <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                Delete
+              </button>
+            </td>
+          </tr>
         ))}
-      </Table.Body>
-    </Table.Root>
+      </tbody>
+    </table>
   );
 };
 
