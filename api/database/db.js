@@ -8,7 +8,6 @@ const db = new sqlite3.Database("./database/data.db", (err) => {
     console.error(err.message);
   } else {
     console.log("Connected to the database.");
-    console.log(this);
   }
 });
 
